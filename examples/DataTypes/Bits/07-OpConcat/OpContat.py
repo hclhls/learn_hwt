@@ -14,12 +14,12 @@ class OpConcat(Unit):
     def _declr(self):
         self.a       = Signal(Bits(self.D_W))
         self.b       = Signal(Bits(self.D_W))
-        self.c       = Signal(Bits(self.D_W*2))._m()
-
+        self.c       = Signal(Bits(self.D_W))._m()
+        self.d       = Signal(Bits(self.D_W))._m()
 
     def _impl(self):
-        self.c(Concat(self.a,self.b))
-        
+        self.c(Concat(self.a[self.D_W//2:],self.b[self.D_W:self.D_W//2]))
+        self.d(self.a[self.D_W:self.D_W//2]._concat(self.b[self.D_W//2:]))
 
 if __name__ == "__main__":
 

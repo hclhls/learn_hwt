@@ -69,7 +69,7 @@ module OpShift #(
     end
 
     always @(b) begin: assig_process_e
-        e = {$signed(b[7:5]), $signed(b[7:3])};
+        e = {{{b[7], b[7]}, b[7]}, $signed(b[7:3])};
     end
 
     always @(b) begin: assig_process_f

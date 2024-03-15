@@ -9,7 +9,7 @@ from hwt.hdl.types.bits import Bits
 from hwt.interfaces.std import Signal, VectSignal
 from hwt.synthesizer.hObjList import HObjList
 
-class Assignment(Unit):
+class SignalList(Unit):
     def _config(self):
         self.D_W = Param(8)
 
@@ -57,7 +57,7 @@ if __name__ == "__main__":
     from hwt.synthesizer.utils import to_rtl_str
     from hwt.serializer.verilog import VerilogSerializer
     
-    print(to_rtl_str(Assignment(), serializer_cls=VerilogSerializer))
+    print(to_rtl_str(SignalList(), serializer_cls=VerilogSerializer))
 
 
 ```
@@ -65,14 +65,14 @@ if __name__ == "__main__":
 Execute the python script to generate Verilog:
 
 ```sh
-python Assignment.py
+python SignalList.py
 
 ```
 
 The generated Verilog:
 
 ```verilog
-module Assignment #(
+module SignalList #(
     parameter D_W = 8
 ) (
     input wire[7:0] a,

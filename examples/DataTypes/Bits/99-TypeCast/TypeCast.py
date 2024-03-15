@@ -14,6 +14,8 @@ class TypeCast(Unit):
         self.a       = Signal(Bits(self.D_W))
         self.b       = Signal(Bits(self.D_W,   signed=True))
         self.a_add_b = Signal(Bits(self.D_W+1, signed=True))._m()
+        self.c       = Signal(Bits(self.D_W*2))._m()
+        self.d       = Signal(Bits(self.D_W*2, signed=True))._m()
 
     def _impl(self):
         self.a_signed = self._sig(name="a_signed", dtype=Bits(self.D_W,   signed=True))
@@ -22,6 +24,8 @@ class TypeCast(Unit):
 
         self.a_add_b (self.a_signed._reinterpret_cast(self.a_add_b._dtype) +  self.b._reinterpret_cast(self.a_add_b._dtype))
 
+        self.c(self.a, fit=True)
+        self.d(self.b, fit=True)  
 
 if __name__ == "__main__":
 

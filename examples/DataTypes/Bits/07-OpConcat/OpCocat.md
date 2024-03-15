@@ -17,11 +17,12 @@ class OpConcat(Unit):
     def _declr(self):
         self.a       = Signal(Bits(self.D_W))
         self.b       = Signal(Bits(self.D_W))
-        self.c       = Signal(Bits(self.D_W*2))._m()
-
+        self.c       = Signal(Bits(self.D_W))._m()
+        self.d       = Signal(Bits(self.D_W))._m()
 
     def _impl(self):
-        self.c(Concat(self.a,self.b))
+        self.c(Concat(self.a[self.D_W//2:],self.b[self.D_W:self.D_W//2]))
+        self.d(self.a[self.D_W:self.D_W//2]._concat(self.b[self.D_W//2:]))
         
 
 if __name__ == "__main__":
@@ -51,10 +52,15 @@ module OpConcat #(
 ) (
     input wire[7:0] a,
     input wire[7:0] b,
-    output reg[15:0] c
+    output reg[7:0] c,
+    output reg[7:0] d
 );
     always @(a, b) begin: assig_process_c
-        c = {a, b};
+        c = {a[3:0], b[7:4]};
+    end
+
+    always @(a, b) begin: assig_process_d
+        d = {a[7:4], b[3:0]};
     end
 
     generate if (D_W != 8)
@@ -62,4 +68,5 @@ module OpConcat #(
     endgenerate
 
 endmodule
+
 ```

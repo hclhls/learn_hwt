@@ -7,7 +7,7 @@ from hwt.hdl.types.bits import Bits
 from hwt.interfaces.std import Signal, VectSignal
 from hwt.synthesizer.hObjList import HObjList
 
-class Assignment(Unit):
+class SignalList(Unit):
     def _config(self):
         self.D_W = Param(8)
 
@@ -58,7 +58,7 @@ if __name__ == "__main__":
     from hwt.serializer.verilog import VerilogSerializer
     from hwt.serializer.systemC import SystemCSerializer
 
-    print(to_rtl_str(Assignment(), serializer_cls=HwtSerializer))
-    print(to_rtl_str(Assignment(), serializer_cls=Vhdl2008Serializer))
-    print(to_rtl_str(Assignment(), serializer_cls=VerilogSerializer))
-    print(to_rtl_str(Assignment(), serializer_cls=SystemCSerializer))
+    print(to_rtl_str(SignalList(), serializer_cls=HwtSerializer))
+    print(to_rtl_str(SignalList(), serializer_cls=Vhdl2008Serializer))
+    print(to_rtl_str(SignalList(), serializer_cls=VerilogSerializer))
+    print(to_rtl_str(SignalList(), serializer_cls=SystemCSerializer))

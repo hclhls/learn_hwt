@@ -16,6 +16,8 @@ class TypeCast(Unit):
         self.a       = Signal(Bits(self.D_W))
         self.b       = Signal(Bits(self.D_W,   signed=True))
         self.a_add_b = Signal(Bits(self.D_W+1, signed=True))._m()
+        self.c       = Signal(Bits(self.D_W*2))._m()
+        self.d       = Signal(Bits(self.D_W*2, signed=True))._m()
 
     def _impl(self):
         self.a_signed = self._sig(name="a_signed", dtype=Bits(self.D_W,   signed=True))
@@ -24,6 +26,8 @@ class TypeCast(Unit):
 
         self.a_add_b (self.a_signed._reinterpret_cast(self.a_add_b._dtype) +  self.b._reinterpret_cast(self.a_add_b._dtype))
 
+        self.c(self.a, fit=True)
+        self.d(self.b, fit=True)  
 
 if __name__ == "__main__":
 
@@ -49,7 +53,9 @@ module TypeCast #(
 ) (
     input wire[7:0] a,
     output reg signed[8:0] a_add_b,
-    input wire signed[7:0] b
+    input wire signed[7:0] b,
+    output reg[15:0] c,
+    output reg signed[15:0] d
 );
     reg signed[7:0] a_signed;
     always @(a_signed, b) begin: assig_process_a_add_b
@@ -64,11 +70,20 @@ module TypeCast #(
         a_signed = $unsigned(a);
     end
 
+    always @(a) begin: assig_process_c
+        c = {8'h00, a};
+    end
+
+    always @(b) begin: assig_process_d
+        reg[15:0] tmp_concat_0;
+        tmp_concat_0 = {{{{{{{{b[7], b[7]}, b[7]}, b[7]}, b[7]}, b[7]}, b[7]}, b[7]}, $signed(b)};
+        d = $unsigned(tmp_concat_0);
+    end
+
     generate if (D_W != 8)
         $error("%m Generated only for this param value");
     endgenerate
 
 endmodule
-
 
 ```
