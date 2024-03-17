@@ -17,9 +17,9 @@ class MultiClock(Unit):
         self.o_rst    = Rst()
 
     def _impl(self):
-        c_reg0 = self._reg(name="c_reg0", def_val=0, clk=self.i_clk, rst=self.i_rst, rst_async=False)
-        c_reg1 = self._reg(name="c_reg1", def_val=0, clk=self.o_clk, rst=self.o_rst, rst_async=False)
-        c_reg2 = self._reg(name="c_reg2", def_val=0, clk=self.o_clk, rst=self.o_rst, rst_async=False)
+        c_reg0 = self._reg(name="c_reg0", def_val=0, clk=self.i_clk, rst=self.i_rst)
+        c_reg1 = self._reg(name="c_reg1", def_val=0, clk=self.o_clk, rst=self.o_rst)
+        c_reg2 = self._reg(name="c_reg2", def_val=0, clk=self.o_clk, rst=self.o_rst)
         
         c_reg0(self.a)
         c_reg1(c_reg0)
