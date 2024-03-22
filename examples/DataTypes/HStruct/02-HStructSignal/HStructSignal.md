@@ -9,7 +9,7 @@ from hwt.hdl.types.bits import Bits
 from hwt.interfaces.std import Signal
 from hwt.hdl.types.defs import BIT
 
-class Assign(Unit):
+class HStructSignal(Unit):
     
     def _declr(self):
         self.a = Signal(Bits(2))
@@ -30,21 +30,21 @@ if __name__ == "__main__":
     from hwt.synthesizer.utils import to_rtl_str
     from hwt.serializer.verilog import VerilogSerializer
     
-    print(to_rtl_str(Assign(), serializer_cls=VerilogSerializer))
+    print(to_rtl_str(HStructSignal(), serializer_cls=VerilogSerializer))
     
 ```
 
 Execute the python script to generate Verilog:
 
 ```sh
-python Assign.py
+python HStructSignal.py
 
 ```
 
 The generated Verilog:
 
 ```verilog
-module Assign (
+module HStructSignal (
     input wire[1:0] a,
     output reg[1:0] b
 );

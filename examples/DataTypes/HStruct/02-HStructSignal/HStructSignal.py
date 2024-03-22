@@ -7,7 +7,7 @@ from hwt.hdl.types.bits import Bits
 from hwt.interfaces.std import Signal
 from hwt.hdl.types.defs import BIT
 
-class Assign(Unit):
+class HStructSignal(Unit):
     
     def _declr(self):
         self.a = Signal(Bits(2))
@@ -31,7 +31,7 @@ if __name__ == "__main__":
     from hwt.serializer.verilog import VerilogSerializer
     from hwt.serializer.systemC import SystemCSerializer
 
-    print(to_rtl_str(Assign(), serializer_cls=HwtSerializer))
-    print(to_rtl_str(Assign(), serializer_cls=Vhdl2008Serializer))
-    print(to_rtl_str(Assign(), serializer_cls=VerilogSerializer))
-    print(to_rtl_str(Assign(), serializer_cls=SystemCSerializer))
+    print(to_rtl_str(HStructSignal(), serializer_cls=HwtSerializer))
+    print(to_rtl_str(HStructSignal(), serializer_cls=Vhdl2008Serializer))
+    print(to_rtl_str(HStructSignal(), serializer_cls=VerilogSerializer))
+    print(to_rtl_str(HStructSignal(), serializer_cls=SystemCSerializer))
