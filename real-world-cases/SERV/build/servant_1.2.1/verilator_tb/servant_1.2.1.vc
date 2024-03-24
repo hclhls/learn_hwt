@@ -1,0 +1,35 @@
+--Mdir .
+--cc
+--trace
+src/serv_1.2.1/rtl/serv_bufreg_hwt.v
+src/serv_1.2.1/rtl/serv_bufreg2.v
+src/serv_1.2.1/rtl/serv_alu_hwt.v
+src/serv_1.2.1/rtl/serv_csr.v
+src/serv_1.2.1/rtl/serv_ctrl.v
+src/serv_1.2.1/rtl/serv_decode.v
+src/serv_1.2.1/rtl/serv_immdec.v
+src/serv_1.2.1/rtl/serv_mem_if.v
+src/serv_1.2.1/rtl/serv_rf_if.v
+src/serv_1.2.1/rtl/serv_rf_ram_if.v
+src/serv_1.2.1/rtl/serv_rf_ram.v
+src/serv_1.2.1/rtl/serv_state.v
+src/serv_1.2.1/rtl/serv_top.v
+src/serv_1.2.1/rtl/serv_rf_top.v
+src/serv_1.2.1/rtl/serv_aligner_hwt.v
+src/serv_1.2.1/rtl/serv_compdec.v
+src/servile_1.3.0/servile/servile_rf_mem_if.v
+src/servile_1.3.0/servile/servile_mux.v
+src/servile_1.3.0/servile/servile_arbiter.v
+src/servile_1.3.0/servile/servile.v
+src/servant_1.2.1/servant/servant_timer.v
+src/servant_1.2.1/servant/servant_gpio.v
+src/servant_1.2.1/servant/servant_mux.v
+src/servant_1.2.1/servant/servant_ram.v
+src/servant_1.2.1/servant/servant.v
+src/servant_1.2.1/bench/servant_sim.v
+--top-module servant_sim
+
+--exe
+src/servant_1.2.1/bench/servant_tb.cpp
+-Gmemsize=32768
+-Gwith_csr=1
